@@ -1,14 +1,18 @@
 plugins {
-    `kotlin-dsl`
+    kotlin("jvm") version "1.4.32"
     id("com.gradle.plugin-publish") version "0.14.0"
     `java-gradle-plugin`
+}
+
+dependencies {
+    implementation(gradleApi())
 }
 
 gradlePlugin {
     plugins {
         create("gradleBasePlugin") {
             id = "com.github.godfather1103.gradle.base.plugin"
-            implementationClass = "Gradle_base_pluginPlugin"
+            implementationClass = "com.github.godfather1103.GradleBasePlugin"
             displayName = "Gradle Base Plugin"
             description = "Gradle Base Plugin"
         }
