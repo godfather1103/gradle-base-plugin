@@ -80,7 +80,7 @@ tasks.javadoc {
 gradlePlugin {
     plugins {
         create("gradleBasePlugin") {
-            id = "com.github.godfather1103.gradle.base.plugin"
+            id = "${property("plugin.groupId")}.${property("plugin.artifactId")}"
             implementationClass = "com.github.godfather1103.GradleBasePlugin"
             displayName = "${property("plugin.displayName")}"
             description = "${property("plugin.description")}"
