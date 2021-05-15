@@ -18,6 +18,7 @@ import java.io.File
 class GradleBasePlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
+        target.plugins.apply("java")
         /**
          * 在clean的任务中增加清除maven build目录和日志目录的行为
          * */
