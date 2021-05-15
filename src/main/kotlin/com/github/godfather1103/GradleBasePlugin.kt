@@ -23,12 +23,12 @@ class GradleBasePlugin : Plugin<Project> {
          * */
         target.tasks.getByName("clean").doFirst {
             // 清除maven的生成目录
-            var file = File(target.path + "/target")
+            var file = File(target.projectDir.absolutePath + "/target")
             if (file.exists()) {
                 deleteFileDir(file)
             }
             // 清除日志的目录
-            file = File(target.path + "/logs")
+            file = File(target.projectDir.absolutePath + "/logs")
             if (file.exists()) {
                 deleteFileDir(file)
             }
