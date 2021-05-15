@@ -3,6 +3,7 @@ plugins {
     id("com.gradle.plugin-publish") version "0.14.0"
     `java-gradle-plugin`
     `maven-publish`
+    `java-library`
     signing
 }
 
