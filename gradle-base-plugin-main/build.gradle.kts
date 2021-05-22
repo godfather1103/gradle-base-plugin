@@ -88,9 +88,6 @@ gradlePlugin {
     }
 }
 
-group = "${property("plugin.groupId")}"
-version = "${property("plugin.version")}"
-
 pluginBundle {
     website = "https://github.com/godfather1103"
     vcsUrl = "https://github.com/godfather1103/gradle-base-plugin"
