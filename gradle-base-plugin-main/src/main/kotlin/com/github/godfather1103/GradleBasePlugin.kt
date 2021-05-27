@@ -85,7 +85,6 @@ class GradleBasePlugin : Plugin<Project> {
             run {
                 task.doFirst {
                     val p = extension.getFilterParams()
-                    println(p)
                     task.filter(mapOf("tokens" to p), org.apache.tools.ant.filters.ReplaceTokens::class.java)
                 }
             }
