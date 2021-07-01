@@ -8,10 +8,13 @@ buildscript {
 }
 apply(plugin = "${property("plugin.groupId")}.${property("plugin.artifactId")}")
 
-configure<com.github.godfather1103.GradleBasePlugin.BasePluginExtension> {
-    param.put("one", "1")
+configure<com.github.godfather1103.ext.BasePluginExtension> {
+    addFilterParam("one", "1")
     if (System.getProperty("env") == "ccb") {
-        param.put("two", "2")
+        addFilterParam("two", "2")
     }
-    files.set(project.projectDir.absolutePath + "/filters/a.properties")
+    setFilterParamFile(project.projectDir.absolutePath + "/filters/a.properties")
+    excludeFilter("*.txt")
+    excludeFilter("**/*.docx")
+    includeFilter("a.txt")
 }
