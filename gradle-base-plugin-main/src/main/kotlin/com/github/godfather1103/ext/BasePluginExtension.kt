@@ -13,22 +13,30 @@ open class BasePluginExtension(project: Project) {
     /**
      * filter参数值读取的配置文件（properties）
      * */
-    val files: Property<String> = project.objects.property(String::class.java)
+    private val files: Property<String> = project.objects.property(String::class.java)
 
     /**
      * filter参数值对
      * */
-    val param: MapProperty<String, String> = project.objects.mapProperty(String::class.java, String::class.java)
+    private val param: MapProperty<String, String> = project.objects.mapProperty(String::class.java, String::class.java)
 
     /**
      * 需要跳过filter的资源文件的Pattern
      * */
-    val excludeFilterPatterns: SetProperty<String> = project.objects.setProperty(String::class.java)
+    private val excludeFilterPatterns: SetProperty<String> = project.objects.setProperty(String::class.java)
+
+    fun getExcludeFilterPatterns(): SetProperty<String> {
+        return excludeFilterPatterns
+    }
 
     /**
      * 需要进行filter的资源文件的Pattern
      * */
-    val includeFilterPatterns: SetProperty<String> = project.objects.setProperty(String::class.java)
+    private val includeFilterPatterns: SetProperty<String> = project.objects.setProperty(String::class.java)
+
+    fun getIncludeFilterPatterns(): SetProperty<String> {
+        return includeFilterPatterns
+    }
 
     /**
      * 获取filter对应的参数值对<BR>
@@ -66,8 +74,10 @@ open class BasePluginExtension(project: Project) {
      * @author 作者: Jack Chu E-mail: chuchuanbao@gmail.com
      * 创建时间：2021/7/1 13:15
      */
-    fun excludeFilterPattern(pattern: String) {
-        excludeFilterPatterns.add(pattern)
+    fun excludeFilter(pattern: String) {
+        if (pattern.isNotEmpty()) {
+            excludeFilterPatterns.add(pattern)
+        }
     }
 
     /**
@@ -77,8 +87,10 @@ open class BasePluginExtension(project: Project) {
      * @author 作者: Jack Chu E-mail: chuchuanbao@gmail.com
      * 创建时间：2021/7/1 13:15
      */
-    fun includeFilterPattern(pattern: String) {
-        includeFilterPatterns.add(pattern)
+    fun includeFilter(pattern: String) {
+        if (pattern.isNotEmpty()) {
+            includeFilterPatterns.add(pattern)
+        }
     }
 
     /**
@@ -89,7 +101,7 @@ open class BasePluginExtension(project: Project) {
      * @author 作者: Jack Chu E-mail: chuchuanbao@gmail.com
      * 创建时间：2021/7/1 13:16
      */
-    fun addParam(key: String, value: String) {
+    fun addFilterParam(key: String, value: String) {
         param.put(key, value)
     }
 
@@ -101,7 +113,9 @@ open class BasePluginExtension(project: Project) {
      * 创建时间：2021/7/1 13:16
      */
     fun setFiles(filePath: String) {
-        files.set(filePath)
+        if (filePath.isNotEmpty()) {
+            files.set(filePath)
+        }
     }
 
     /**
