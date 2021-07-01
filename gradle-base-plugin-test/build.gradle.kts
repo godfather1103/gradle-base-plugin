@@ -9,12 +9,12 @@ buildscript {
 apply(plugin = "${property("plugin.groupId")}.${property("plugin.artifactId")}")
 
 configure<com.github.godfather1103.ext.BasePluginExtension> {
-    param.put("one", "1")
+    addFilterParam("one", "1")
     if (System.getProperty("env") == "ccb") {
-        param.put("two", "2")
+        addFilterParam("two", "2")
     }
-    files.set(project.projectDir.absolutePath + "/filters/a.properties")
-    excludeFilterPattern("*.txt")
-    excludeFilterPattern("**/*.docx")
-    includeFilterPattern("a.txt")
+    setFilterParamFile(project.projectDir.absolutePath + "/filters/a.properties")
+    excludeFilter("*.txt")
+    excludeFilter("**/*.docx")
+    includeFilter("a.txt")
 }

@@ -112,7 +112,7 @@ open class BasePluginExtension(project: Project) {
      * @author 作者: Jack Chu E-mail: chuchuanbao@gmail.com
      * 创建时间：2021/7/1 13:16
      */
-    fun setFiles(filePath: String) {
+    fun setFilterParamFile(filePath: String) {
         if (filePath.isNotEmpty()) {
             files.set(filePath)
         }
