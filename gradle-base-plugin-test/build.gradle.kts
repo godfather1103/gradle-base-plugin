@@ -3,7 +3,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath("$group:${property("plugin.artifactId")}:$version")
+        classpath("${property("plugin.groupId")}:${property("plugin.artifactId")}:${property("test.plugin.version")}")
     }
 }
 apply(plugin = "${property("plugin.groupId")}.${property("plugin.artifactId")}")
