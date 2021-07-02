@@ -61,16 +61,16 @@ class GradleBasePlugin : Plugin<Project> {
                                 org.apache.tools.ant.filters.ReplaceTokens::class.java
                             )
                         } else {
-                            if (extension.getExcludeFilterPatterns().get().isNotEmpty()) {
-                                task.filesNotMatching(extension.getExcludeFilterPatterns().get()) {
+                            if (extension.getExcludeFilterPatterns().getOrElse(HashSet()).isNotEmpty()) {
+                                task.filesNotMatching(extension.getExcludeFilterPatterns().getOrElse(HashSet())) {
                                     it.filter(
                                         mapOf("tokens" to p),
                                         org.apache.tools.ant.filters.ReplaceTokens::class.java
                                     )
                                 }
                             }
-                            if (extension.getIncludeFilterPatterns().get().isNotEmpty()) {
-                                task.filesMatching(extension.getIncludeFilterPatterns().get()) {
+                            if (extension.getIncludeFilterPatterns().getOrElse(HashSet()).isNotEmpty()) {
+                                task.filesMatching(extension.getIncludeFilterPatterns().getOrElse(HashSet())) {
                                     it.filter(
                                         mapOf("tokens" to p),
                                         org.apache.tools.ant.filters.ReplaceTokens::class.java

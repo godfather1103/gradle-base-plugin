@@ -47,11 +47,11 @@ open class BasePluginExtension(project: Project) {
      */
     fun getFilterParams(): HashMap<String, String> {
         val map = HashMap<String, String>()
-        if (files.get().isNotEmpty()) {
-            map.putAll(getParamsFromFile(files.get()))
+        if (files.getOrElse("").isNotEmpty()) {
+            map.putAll(getParamsFromFile(files.getOrElse("")))
         }
-        if (param.get().isNotEmpty()) {
-            map.putAll(param.get())
+        if (param.getOrElse(HashMap()).isNotEmpty()) {
+            map.putAll(param.getOrElse(HashMap()))
         }
         return map
     }
@@ -64,7 +64,8 @@ open class BasePluginExtension(project: Project) {
      * 创建时间：2021/7/1 13:14
      */
     fun isFilterAll(): Boolean {
-        return excludeFilterPatterns.get().isEmpty() && includeFilterPatterns.get().isEmpty()
+        return excludeFilterPatterns.getOrElse(HashSet()).isEmpty()
+                && includeFilterPatterns.getOrElse(HashSet()).isEmpty()
     }
 
     /**
