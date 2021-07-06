@@ -13,6 +13,9 @@ configure<com.github.godfather1103.ext.BasePluginExtension> {
     if (System.getProperty("env") == "ccb") {
         addFilterParam("two", "2")
     }
+    cacheProcessResources {
+        false
+    }
     setFilterParamFile(project.projectDir.absolutePath + "/filters/a.properties")
     excludeFilter("*.txt")
     excludeFilter("**/*.docx")
