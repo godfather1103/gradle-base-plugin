@@ -52,6 +52,9 @@ class GradleBasePlugin : Plugin<Project> {
 
         target.tasks.withType(ProcessResources::class.java) { task ->
             run {
+                task.outputs.upToDateWhen {
+                    extension.getCacheProcessResources()
+                }
                 task.doFirst {
                     val p = extension.getFilterParams()
                     if (p.isNotEmpty()) {
@@ -61,16 +64,16 @@ class GradleBasePlugin : Plugin<Project> {
                                 org.apache.tools.ant.filters.ReplaceTokens::class.java
                             )
                         } else {
-                            if (extension.getExcludeFilterPatterns().getOrElse(HashSet()).isNotEmpty()) {
-                                task.filesNotMatching(extension.getExcludeFilterPatterns().getOrElse(HashSet())) {
+                            if (extension.getExcludeFilterPatterns().isNotEmpty()) {
+                                task.filesNotMatching(extension.getExcludeFilterPatterns()) {
                                     it.filter(
                                         mapOf("tokens" to p),
                                         org.apache.tools.ant.filters.ReplaceTokens::class.java
                                     )
                                 }
                             }
-                            if (extension.getIncludeFilterPatterns().getOrElse(HashSet()).isNotEmpty()) {
-                                task.filesMatching(extension.getIncludeFilterPatterns().getOrElse(HashSet())) {
+                            if (extension.getIncludeFilterPatterns().isNotEmpty()) {
+                                task.filesMatching(extension.getIncludeFilterPatterns()) {
                                     it.filter(
                                         mapOf("tokens" to p),
                                         org.apache.tools.ant.filters.ReplaceTokens::class.java

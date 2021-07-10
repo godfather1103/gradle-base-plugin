@@ -25,18 +25,49 @@ open class BasePluginExtension(project: Project) {
      * */
     private val excludeFilterPatterns: SetProperty<String> = project.objects.setProperty(String::class.java)
 
-    fun getExcludeFilterPatterns(): SetProperty<String> {
-        return excludeFilterPatterns
-    }
+    fun getExcludeFilterPatterns(): Set<String> = excludeFilterPatterns.orNull ?: HashSet<String>()
 
     /**
      * 需要进行filter的资源文件的Pattern
      * */
     private val includeFilterPatterns: SetProperty<String> = project.objects.setProperty(String::class.java)
 
-    fun getIncludeFilterPatterns(): SetProperty<String> {
-        return includeFilterPatterns
-    }
+    fun getIncludeFilterPatterns(): Set<String> = includeFilterPatterns.orNull ?: HashSet<String>()
+
+    /**
+     * ProcessResources任务是否需要缓存
+     * */
+    private val cacheProcessResources: Property<Boolean> = project.objects.property(Boolean::class.java)
+
+
+    /**
+     * 设置ProcessResources任务是否需要缓存的标识<BR>
+     *
+     * @param b 标识
+     * @author 作者: chu.chuanbao E-mail: chu.chuanbao@trs.com.cn
+     * 创建时间：2021/7/6 16:42
+     */
+    fun cacheProcessResources(b: () -> Boolean) = cacheProcessResources.set(b())
+
+
+    /**
+     * 设置ProcessResources任务是否需要缓存的标识<BR>
+     *
+     * @param b 标识
+     * @author 作者: chu.chuanbao E-mail: chu.chuanbao@trs.com.cn
+     * 创建时间：2021/7/6 16:42
+     */
+    fun cacheProcessResources(b: Boolean) = cacheProcessResources.set(b)
+
+
+    /**
+     * 获取ProcessResources任务是否需要缓存的标识（默认不缓存）<BR>
+     *
+     * @return 标识
+     * @author 作者: chu.chuanbao E-mail: chu.chuanbao@trs.com.cn
+     * 创建时间：2021/7/6 16:41
+     */
+    fun getCacheProcessResources(): Boolean = cacheProcessResources.getOrElse(false)
 
     /**
      * 获取filter对应的参数值对<BR>
