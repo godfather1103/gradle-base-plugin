@@ -4,6 +4,7 @@ plugins {
     `maven-publish`
     `java-library`
     signing
+    kotlin("jvm") version "1.4.32"
 }
 
 dependencies {
