@@ -1,5 +1,5 @@
-rootProject.name = "gradle-base-plugin-root"
-include(":gradle-base-plugin")
+rootProject.name = "gradle-base-plugin"
+pluginManagement {
+    includeBuild("gradle-base-plugin-main")
+}
 include(":gradle-base-plugin-test")
-
-project(":gradle-base-plugin").projectDir = file("gradle-base-plugin-main")
