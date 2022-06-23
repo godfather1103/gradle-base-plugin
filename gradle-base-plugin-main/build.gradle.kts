@@ -9,6 +9,7 @@ plugins {
 
 dependencies {
     implementation(gradleApi())
+    testImplementation("junit:junit:4.12")
 }
 
 java {

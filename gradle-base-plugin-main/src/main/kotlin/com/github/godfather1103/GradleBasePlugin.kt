@@ -1,6 +1,7 @@
 package com.github.godfather1103
 
 import com.github.godfather1103.ext.BasePluginExtension
+import com.github.godfather1103.listener.TaskTraceListener
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.compile.JavaCompile
@@ -49,6 +50,12 @@ class GradleBasePlugin : Plugin<Project> {
 
         // 设置配置项代码块
         val extension = target.extensions.create("baseExt", BasePluginExtension::class.java, target)
+        target.gradle.afterProject {
+            // 是否开启时间记录
+            if (extension.openRecordTime.getOrElse(true)) {
+                target.gradle.addListener(TaskTraceListener())
+            }
+        }
 
         target.tasks.withType(ProcessResources::class.java) { task ->
             run {

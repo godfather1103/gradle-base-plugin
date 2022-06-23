@@ -15,6 +15,8 @@ open class BasePluginExtension(project: Project) {
      * */
     private val files: Property<String> = project.objects.property(String::class.java)
 
+    val openRecordTime: Property<Boolean> = project.objects.property(Boolean::class.java)
+
     /**
      * filter参数值对
      * */
