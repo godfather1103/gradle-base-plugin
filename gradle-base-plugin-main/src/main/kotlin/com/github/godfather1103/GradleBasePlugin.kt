@@ -52,7 +52,7 @@ class GradleBasePlugin : Plugin<Project> {
         val extension = target.extensions.create("baseExt", BasePluginExtension::class.java, target)
         target.gradle.afterProject {
             // 是否开启时间记录
-            if (extension.openRecordTime.getOrElse(true)) {
+            if (extension.openRecordTime.getOrElse(false)) {
                 target.gradle.addListener(TaskTraceListener())
             }
         }
