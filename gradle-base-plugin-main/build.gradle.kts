@@ -17,6 +17,9 @@ java {
     withSourcesJar()
 }
 
+group = "${property("plugin.groupId")}"
+version = "${property("plugin.version")}"
+
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
