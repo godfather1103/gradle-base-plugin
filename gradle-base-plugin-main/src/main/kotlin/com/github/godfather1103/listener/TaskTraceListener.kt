@@ -2,6 +2,7 @@ package com.github.godfather1103.listener
 
 import org.gradle.BuildListener
 import org.gradle.BuildResult
+import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.execution.TaskExecutionListener
 import org.gradle.api.initialization.Settings
@@ -10,7 +11,7 @@ import org.gradle.api.tasks.TaskState
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TaskTraceListener : TaskExecutionListener, BuildListener {
+class TaskTraceListener(private val target: Project) : TaskExecutionListener, BuildListener {
 
     private var timeMillis: Long = 0L
 
@@ -20,13 +21,13 @@ class TaskTraceListener : TaskExecutionListener, BuildListener {
 
     override fun beforeExecute(task: Task) {
         timeMillis = System.currentTimeMillis()
-        println("${sdf.format(Date())} : 任务${task.name}开始执行")
+        println("${sdf.format(Date())} : 任务${task.project.name}:${task.name}开始执行")
     }
 
     override fun afterExecute(task: Task, state: TaskState) {
         val t = System.currentTimeMillis() - timeMillis
         all += t
-        println("${sdf.format(Date())} : 任务${task.name}执行完成,耗时:${convertTime(t)}")
+        println("${sdf.format(Date())} : 任务${task.project.name}:${task.name}执行完成,耗时:${convertTime(t)}")
     }
 
     fun convertTime(t: Long): String {
@@ -63,6 +64,6 @@ class TaskTraceListener : TaskExecutionListener, BuildListener {
     }
 
     override fun buildFinished(gradle: BuildResult) {
-        println("${sdf.format(Date())} : 所有任务执行完成,耗时:${convertTime(all)}")
+        println("${sdf.format(Date())} : ${target.name}所有任务执行完成,耗时:${convertTime(all)}")
     }
 }

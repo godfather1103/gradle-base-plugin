@@ -53,7 +53,7 @@ class GradleBasePlugin : Plugin<Project> {
         target.gradle.afterProject {
             // 是否开启时间记录
             if (extension.openRecordTime.getOrElse(false)) {
-                target.gradle.addListener(TaskTraceListener())
+                target.gradle.addListener(TaskTraceListener(target))
             }
         }
 
