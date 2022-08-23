@@ -14,5 +14,4 @@ baseExt {
     excludeFilter("*.txt")
     excludeFilter("**/*.docx")
     includeFilter("a.txt")
-    openRecordTime.set(true)
 }
