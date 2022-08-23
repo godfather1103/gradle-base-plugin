@@ -19,6 +19,10 @@ class TaskTraceListener(private val target: Project) : TaskExecutionListener, Bu
 
     private var all: Long = 0L
 
+    companion object {
+        var flag: Boolean = false
+    }
+
     override fun beforeExecute(task: Task) {
         timeMillis = System.currentTimeMillis()
         println("${sdf.format(Date())} : 任务${task.project.name}:${task.name}开始执行")
