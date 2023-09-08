@@ -7,6 +7,11 @@ plugins {
     kotlin("jvm") version "1.4.32"
 }
 
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
 dependencies {
     implementation(gradleApi())
     testImplementation("junit:junit:4.12")
